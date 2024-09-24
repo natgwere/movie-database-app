@@ -14,7 +14,7 @@ async function getTrendingMoviesPreview() {
 
   const movies = data.results
   console.log(movies)
-  const trendingMoviesPreviewList = document.querySelector('#trendingPreview .trendingPreview-movieList')
+  const trendingMoviesPreviewList = document.querySelector('#trendingPreview .trendingPreview-moviesList')
   movies.forEach(movie => {
 
     const movieContainer = document.createElement('div')
