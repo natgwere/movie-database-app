@@ -9,21 +9,15 @@ trendingBtn.addEventListener('click', () => {
 arrowBtn.addEventListener('click', () => {
   location.hash = ''
 })
+
 const navigator = () => {
   console.log({ location })
-
-  if (location.hash.startsWith('#trends')) {
-    trendPage()
-  } else if (location.hash.startsWith('#search=')) {
-    searchPage()
-  } else if (location.hash.startsWith('#movie=')) {
-    movieDetailsPage()
-  } else if (location.hash.startsWith('#genre=')) {
-    genresPage()
-  } else {
-    homePage()
-  }
-}
+  location.hash.startsWith('#trends') ? trendPage() :
+  location.hash.startsWith('#search=') ? searchPage() :
+  location.hash.startsWith('#movie=') ? movieDetailsPage() :
+  location.hash.startsWith('#genre=') ? genresPage() :
+  homePage()
+ }
 
 function homePage() {
   headerSection.classList.remove('header-container--long')
@@ -41,7 +35,7 @@ function homePage() {
   movieDetailSection.classList.add('inactive')
 
   getTrendingMoviesPreview()
-  getGenrePreview()
+  getGenresPreview()
 }
 
 function genresPage() {
@@ -58,6 +52,11 @@ function genresPage() {
 
   genericSection.classList.remove('inactive')
   movieDetailSection.classList.add('inactive')
+
+  const [_, genreData] = location.hash.split('=')
+  const [genreId, genreName] = genreData.split('/')
+
+  getMoviesByGenre(genreId, genreName)
 }
 
 function movieDetailsPage() {
@@ -107,8 +106,6 @@ function trendPage() {
   genericSection.classList.remove('inactive')
   movieDetailSection.classList.add('inactive')
  } 
-
-
 
 window.addEventListener('DOMContentLoaded', navigator, false)
 window.addEventListener('hashchange', navigator, false)

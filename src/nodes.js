@@ -1,27 +1,29 @@
+const $ = (selector) => document.querySelector(selector)
+
 // Sections
-const headerSection = document.querySelector('#header');
-const trendingPreviewSection = document.querySelector('#trendingPreview');
-const genresPreviewSection = document.querySelector('#genresPreview');
-const genericSection = document.querySelector('#genericList');
-const movieDetailSection = document.querySelector('#movieDetail');
+const headerSection = $('#header');
+const trendingPreviewSection = $('#trendingPreview');
+const genresPreviewSection = $('#genresPreview');
+const genericSection = $('#genericList');
+const movieDetailSection = $('#movieDetail');
 
 // Lists & Containers
-const searchForm = document.querySelector('#searchForm');
-const trendingMoviesPreviewList = document.querySelector('.trendingPreview-moviesList');
-const genresPreviewList = document.querySelector('.genresPreview-list');
-const movieDetailGenresList = document.querySelector('#movieDetail .genres-list');
-const relatedMoviesContainer = document.querySelector('.relatedMovies-scrollContainer');
+const searchForm = $('#searchForm');
+const trendingMoviesPreviewList = $('.trendingPreview-moviesList');
+const genresPreviewList = $('.genresPreview-list');
+const movieDetailGenresList = $('#movieDetail .genres-list');
+const relatedMoviesContainer = $('.relatedMovies-scrollContainer');
 
 // Elements
-const headerTitle = document.querySelector('.header-title');
-const arrowBtn = document.querySelector('.header-arrow');
-const headerGenreTitle = document.querySelector('.header-title--genrePreview');
+const headerTitle = $('.header-title');
+const arrowBtn = $('.header-arrow');
+const headerGenreTitle = $('.header-title--genrePreview');
 
-const searchFormInput = document.querySelector('#searchForm input');
-const searchFormBtn = document.querySelector('#searchBtn');
+const searchFormInput = $('#searchForm input');
+const searchFormBtn = $('#searchBtn');
 
-const trendingBtn = document.querySelector('.trendingPreview-btn');
+const trendingBtn = $('.trendingPreview-btn');
 
-const movieDetailTitle = document.querySelector('.movieDetail-title');
-const movieDetailDescription = document.querySelector('.movieDetail-description');
-const movieDetailScore = document.querySelector('.movieDetail-score');
+const movieDetailTitle = $('.movieDetail-title');
+const movieDetailDescription = $('.movieDetail-description');
+const movieDetailScore = $('.movieDetail-score');

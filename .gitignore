@@ -1,2 +1,4 @@
 # ignore ignore (API KEY)
 src/ignore.js
+
+.DS_Store
