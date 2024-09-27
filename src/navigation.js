@@ -7,7 +7,7 @@ trendingBtn.addEventListener('click', () => {
 })
 
 arrowBtn.addEventListener('click', () => {
-  location.hash = ''
+  history.back()
 })
 
 const navigator = () => {
@@ -94,7 +94,7 @@ function searchPage() {
   movieDetailSection.classList.add('inactive')
 
   const [_, query] = location.hash.split('=')
-  getMoviesBySearch (query)
+  getMoviesBySearch(query)
 }
 
 function trendPage() {
