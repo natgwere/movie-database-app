@@ -17,6 +17,9 @@ const navigator = () => {
   location.hash.startsWith('#movie=') ? movieDetailsPage() :
   location.hash.startsWith('#genre=') ? genresPage() :
   homePage()
+
+  document.documentElement.scrollTop = 0
+  document.body.scrollTop = 0
  }
 
 function homePage() {
