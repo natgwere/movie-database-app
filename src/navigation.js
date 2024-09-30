@@ -29,6 +29,7 @@ function homePage() {
   arrowBtn.classList.remove('header-arrow--white')
   headerTitle.classList.remove('inactive')
   headerGenreTitle.classList.add('inactive')
+  headerTrendsTitle.classList.add('inactive')
   searchForm.classList.remove('inactive')
 
   trendingPreviewSection.classList.remove('inactive')
@@ -38,7 +39,7 @@ function homePage() {
   movieDetailSection.classList.add('inactive')
 
   getTrendingMoviesPreview()
-  getGenresPreview()
+  getGenresPreview(genresPreviewList)
 }
 
 function genresPage() {
@@ -103,7 +104,8 @@ function trendPage() {
   arrowBtn.classList.remove('inactive')
   arrowBtn.classList.remove('header-arrow--white')
   headerTitle.classList.add('inactive')
-  headerGenreTitle.classList.remove('inactive')
+  headerGenreTitle.classList.add('inactive')
+  headerTrendsTitle.classList.remove('inactive')
   searchForm.classList.add('inactive')
 
   trendingPreviewSection.classList.add('inactive')
@@ -111,6 +113,8 @@ function trendPage() {
 
   genericSection.classList.remove('inactive')
   movieDetailSection.classList.add('inactive')
+
+  getTrendingMovies()
  } 
 
 window.addEventListener('DOMContentLoaded', navigator, false)

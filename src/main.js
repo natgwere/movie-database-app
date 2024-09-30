@@ -11,8 +11,21 @@ const api = axios.create({
 function createMoviesPreview(movies, container) {
   container.innerHTML = ''
   movies.forEach(movie => {
+
     const movieContainer = document.createElement('div')
+    const shortTitle = movie.title.split(':')[0].split(' ').join('-')
     movieContainer.classList.add('movie-container')
+    movieContainer.addEventListener('click', () => {
+      console.log(movie)
+      location.hash = `#movie=${movie.id}/${shortTitle}`
+      headerSection.style.backgroundImage = `url('https://image.tmdb.org/t/p/w300${movie.poster_path}')`
+      movieDetailTitle.innerHTML = movie.title
+      movieDetailScore.innerHTML = movie.vote_average
+      movieDetailDescription.innerHTML = movie.overview
+      console.log(movie.genre_ids)
+      getGenresPreview(movieDetailGenresList, movie.genre_ids)
+      getRecommendations(movie.id)
+    })
 
     const movieImg = document.createElement('img')
     movieImg.classList.add('movie-img')
@@ -37,7 +50,7 @@ function createGenresPreview(genres, container) {
     const genreTitle = document.createElement('h3')
     genreTitle.classList.add('genre-title')
     genreTitle.setAttribute('id', 'id' + genre.id)
-    genreTitle.textContent = genre.name
+    genreTitle.textContent = genre.name 
     genreTitle.addEventListener('click', () => {
       location.hash = `#genre=${genre.id}/${genre.name}`
     })
@@ -55,20 +68,21 @@ async function getTrendingMoviesPreview() {
   createMoviesPreview(movies, trendingMoviesPreviewList)
 }
 
-async function getGenresPreview() {
+async function getGenresPreview(container) {
   const { data } = await api('genre/movie/list')
   console.log(data)
 
-  const genres = data.genres
+  let genres = data.genres
+
   console.log(genres)
 
-  createGenresPreview(genres, genresPreviewList)
+  createGenresPreview(genres, container)
 }
 
 async function getMoviesByGenre(id, genre) {
   const { data } = await api('discover/movie', {
     params: {
-      with_genres: id,
+      with_genres: id
     }
   })
   headerGenreTitle.innerHTML = decodeURIComponent(genre)
@@ -84,4 +98,17 @@ async function getMoviesBySearch(query) {
   })
   const movies = data.results
   createMoviesPreview(movies, genericSection)
+}
+
+async function getTrendingMovies() {
+  const { data } = await api('trending/movie/day')
+  headerTrendsTitle.innerHTML = 'Trends'
+  const movies = data.results
+  createMoviesPreview(movies, genericSection)
+}
+
+async function getRecommendations(id) {
+  const { data } = await api('movie/' + id + '/recommendations')
+  const movies = data.results
+  createMoviesPreview (movies, relatedMoviesContainer)
 }
