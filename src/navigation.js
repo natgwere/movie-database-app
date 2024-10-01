@@ -20,6 +20,7 @@ const navigator = () => {
 
   document.documentElement.scrollTop = 0
   document.body.scrollTop = 0
+  relatedMoviesContainer.scrollTo(0, 0)
  }
 
 function homePage() {
@@ -64,8 +65,8 @@ function genresPage() {
 }
 
 function movieDetailsPage() {
+  console.log('hash cambia')
   headerSection.classList.add('header-container--long')
-  // headerSection.style.background = ''
   arrowBtn.classList.remove('inactive')
   arrowBtn.classList.add('header-arrow--white')
   headerTitle.classList.add('inactive')
@@ -77,6 +78,11 @@ function movieDetailsPage() {
 
   genericSection.classList.add('inactive')
   movieDetailSection.classList.remove('inactive')
+  
+  const [_, idTitle] = location.hash.split('=')
+  const [id, ] = idTitle.split('/')
+  console.log(id)
+  getMovieByID(id)
 }
 
 function searchPage() {

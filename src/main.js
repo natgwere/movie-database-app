@@ -16,15 +16,7 @@ function createMoviesPreview(movies, container) {
     const shortTitle = movie.title.split(':')[0].split(' ').join('-')
     movieContainer.classList.add('movie-container')
     movieContainer.addEventListener('click', () => {
-      console.log(movie)
       location.hash = `#movie=${movie.id}/${shortTitle}`
-      headerSection.style.backgroundImage = `url('https://image.tmdb.org/t/p/w300${movie.poster_path}')`
-      movieDetailTitle.innerHTML = movie.title
-      movieDetailScore.innerHTML = movie.vote_average
-      movieDetailDescription.innerHTML = movie.overview
-      console.log(movie.genre_ids)
-      getGenresPreview(movieDetailGenresList, movie.genre_ids)
-      getRecommendations(movie.id)
     })
 
     const movieImg = document.createElement('img')
@@ -37,6 +29,21 @@ function createMoviesPreview(movies, container) {
     movieContainer.appendChild(movieImg)
     container.appendChild(movieContainer)
   })
+}
+
+function createMovieDetails(movie) {
+  headerSection.style.background = `
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.35) 19.27%,
+      rgba(0, 0, 0, 0) 29.17%
+    ),
+    url('https://image.tmdb.org/t/p/w300${movie.poster_path}')`
+  movieDetailTitle.innerHTML = movie.title
+  movieDetailScore.innerHTML = movie.vote_average
+  movieDetailDescription.innerHTML = movie.overview
+  createGenresPreview(movie.genres, movieDetailGenresList)
+  getRelatedMovies(movie.id)
 }
 
 function createGenresPreview(genres, container) {
@@ -58,8 +65,8 @@ function createGenresPreview(genres, container) {
     genreContainer.appendChild(genreTitle)
     container.appendChild(genreContainer)
   })
-
 }
+
 
 // API
 async function getTrendingMoviesPreview() {
@@ -107,8 +114,14 @@ async function getTrendingMovies() {
   createMoviesPreview(movies, genericSection)
 }
 
-async function getRecommendations(id) {
-  const { data } = await api('movie/' + id + '/recommendations')
+async function getMovieByID(id) {
+  const { data: movie } = await api('movie/' + id)
+  console.log(movie)
+  createMovieDetails(movie)
+}
+
+async function getRelatedMovies(id) {
+  const { data } = await api('movie/' + id + '/similar')
   const movies = data.results
   createMoviesPreview (movies, relatedMoviesContainer)
 }
