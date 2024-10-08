@@ -308,6 +308,7 @@ genre-container--loading:nth-child(2) {
 
 .genericList-container .movie-img {
   width: 100%;
+  min-height: 175px;
 }
 
 
